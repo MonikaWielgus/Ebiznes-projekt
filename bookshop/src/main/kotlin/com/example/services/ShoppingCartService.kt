@@ -10,7 +10,21 @@ class ShoppingCartService {
             val cart = ShoppingCartRepository.getShoppingCart(clientId)
             val book = BookService.getBook(bookId)
             if (book != null) {
-                cart?.products?.add(book)
+                val numberOfItems = cart?.products?.get(book)
+                if (numberOfItems == null) {
+                    cart?.products?.put(book, 1)
+                }
+                else {
+                    cart.products[book] = numberOfItems+1
+                }
+            }
+        }
+
+        fun removeFromCart(clientId: Int, bookId: Int) {
+            val cart = ShoppingCartRepository.getShoppingCart(clientId)
+            val book = BookService.getBook(bookId)
+            if (book != null) {
+                cart?.products?.remove(book)
             }
         }
 

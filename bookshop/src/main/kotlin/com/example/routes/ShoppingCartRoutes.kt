@@ -31,5 +31,14 @@ fun Route.shoppingCartRoutes() {
             ShoppingCartService.addToCart(clientId.toInt(), bookId);
             call.respondText("Book added correctly", status = HttpStatusCode.Created)
         }
+        delete("{clientId}") {
+            val clientId = call.parameters["clientId"] ?: return@delete call.respondText(
+                "Missing id",
+                status = HttpStatusCode.BadRequest
+            )
+            val bookId = call.receive<Int>()
+            ShoppingCartService.removeFromCart(clientId.toInt(), bookId);
+            call.respondText("Book removed correctly", status = HttpStatusCode.Created)
+        }
     }
 }
