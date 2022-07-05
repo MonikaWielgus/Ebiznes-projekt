@@ -7,7 +7,7 @@ import com.example.repositories.CategoryRepository
 class CategoryService {
     companion object{
         fun getBooksFromCategory(id: Int) : List<Book> {
-            val result = mutableListOf<Book>();
+            val result = mutableListOf<Book>()
             val books = BookService.getBooksList()
             for(book in books) {
                 if(book.categoryId == id) {
@@ -18,7 +18,11 @@ class CategoryService {
         }
 
         fun getCategoryList() : List<Category> {
-            return CategoryRepository.getCategoryList();
+            return CategoryRepository.getCategoryList()
+        }
+
+        fun getCategory(id: Int) : Category? {
+            return CategoryRepository.getCategory(id)
         }
     }
 }

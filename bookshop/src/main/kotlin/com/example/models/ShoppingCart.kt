@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 class ShoppingCart (
     val clientId: Int,
-    val products: MutableMap<Book, Int>
+    val products: MutableList<BookWithAmount>
 )

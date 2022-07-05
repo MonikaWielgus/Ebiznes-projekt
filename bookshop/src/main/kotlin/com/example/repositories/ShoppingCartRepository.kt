@@ -1,6 +1,5 @@
 package com.example.repositories
 
-import com.example.models.Book
 import com.example.models.ShoppingCart
 
 class ShoppingCartRepository {
@@ -10,11 +9,11 @@ class ShoppingCartRepository {
             return shoppingCartStorage[clientId]
         }
 
-        fun addShoppingCart(clientId: Int) {
-            shoppingCartStorage[clientId] = ShoppingCart(clientId, mutableMapOf())
-        }
+//        fun addShoppingCart(clientId: Int) {
+//            shoppingCartStorage[clientId] = ShoppingCart(clientId, mutableListOf())
+//        }
     }
 }
 
 //val shoppingCartRepository = mutableMapOf<Int, ShoppingCart>();
-val shoppingCartStorage = mutableMapOf(1 to ShoppingCart(1, mutableMapOf()));
+val shoppingCartStorage = mutableMapOf(1 to ShoppingCart(1, mutableListOf()))

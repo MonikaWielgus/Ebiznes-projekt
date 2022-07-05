@@ -1,5 +1,6 @@
 package com.example.services
 
+import com.example.models.BookWithAmount
 import com.example.models.ShoppingCart
 import com.example.repositories.ShoppingCartRepository
 
@@ -10,13 +11,14 @@ class ShoppingCartService {
             val cart = ShoppingCartRepository.getShoppingCart(clientId)
             val book = BookService.getBook(bookId)
             if (book != null) {
-                val numberOfItems = cart?.products?.get(book)
-                if (numberOfItems == null) {
-                    cart?.products?.put(book, 1)
+                for (bookWithAmount in cart?.products!!) {
+                    if (bookWithAmount.book.id == book.id) {
+                        val numberOfItems = bookWithAmount.amount
+                        bookWithAmount.amount = numberOfItems+1
+                        return
+                    }
                 }
-                else {
-                    cart.products[book] = numberOfItems+1
-                }
+                cart.products.add(BookWithAmount(book, 1))
             }
         }
 
@@ -24,7 +26,11 @@ class ShoppingCartService {
             val cart = ShoppingCartRepository.getShoppingCart(clientId)
             val book = BookService.getBook(bookId)
             if (book != null) {
-                cart?.products?.remove(book)
+                for (bookWithAmount in cart?.products!!) {
+                    if (bookWithAmount.book.id == book.id) {
+                        cart.products.remove(bookWithAmount)
+                    }
+                }
             }
         }
 

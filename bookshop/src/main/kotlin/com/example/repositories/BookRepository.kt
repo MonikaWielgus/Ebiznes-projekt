@@ -5,7 +5,7 @@ import com.example.models.*
 class BookRepository {
     companion object{
         fun getBook(id: Int) : Book? {
-            return bookStorage[id];
+            return bookStorage[id]
         }
 
         fun getBooksList() : List<Book> {
@@ -27,6 +27,13 @@ val bookStorage = mutableMapOf(
         "Jakaś książka 2",
         "Jakiś autor 2",
         1,
+        20.30
+    ),
+    3 to Book(
+        3,
+        "Kryminal",
+        "Jakiś autor 2",
+        2,
         20.30
     )
 )
