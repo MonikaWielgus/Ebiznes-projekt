@@ -9,6 +9,10 @@ class ShoppingCartRepository {
             return shoppingCartStorage[clientId]
         }
 
+        fun removeAllFromShoppingCart(clientId: Int) {
+            shoppingCartStorage[clientId] = ShoppingCart(clientId, mutableListOf())
+        }
+
 //        fun addShoppingCart(clientId: Int) {
 //            shoppingCartStorage[clientId] = ShoppingCart(clientId, mutableListOf())
 //        }

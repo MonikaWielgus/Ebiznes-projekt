@@ -15,6 +15,7 @@ fun main() {
         install(CORS) {
             anyHost()
             allowHeader(HttpHeaders.ContentType)
+            allowMethod(HttpMethod.Delete)
         }
     }.start(wait = true)
 }
