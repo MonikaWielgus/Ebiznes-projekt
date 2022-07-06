@@ -55,4 +55,30 @@ export class RemoteServer {
             body: productId
         });
     }
+
+    async removeProductFromCart(clientId, productId) {
+        const url = `http://localhost:8080/cart/${clientId}`;
+        return await fetch(url, {
+            headers: await this.getHeaders(),
+            method: 'delete',
+            body: productId
+        });
+    }
+
+    async removeAllFromProductsCart(clientId) {
+        const url = `http://localhost:8080/cart/${clientId}/all`;
+        return await fetch(url, {
+            headers: await this.getHeaders(),
+            method: 'delete'
+        });
+    }
+
+    async replaceProduct(clientId, productId, amount) {
+        const url = `http://localhost:8080/cart/${clientId}/${amount}`;
+        return await fetch(url, {
+            headers: await this.getHeaders(),
+            method: 'post',
+            body: productId
+        });
+    }
 }

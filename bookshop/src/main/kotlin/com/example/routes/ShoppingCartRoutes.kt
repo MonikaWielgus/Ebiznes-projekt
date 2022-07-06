@@ -31,6 +31,19 @@ fun Route.shoppingCartRoutes() {
             ShoppingCartService.addToCart(clientId.toInt(), bookId);
             call.respondText("Book added correctly", status = HttpStatusCode.Created)
         }
+        post("{clientId}/{amount}") {
+            val clientId = call.parameters["clientId"] ?: return@post call.respondText(
+                "Missing id",
+                status = HttpStatusCode.BadRequest
+            )
+            val amount = call.parameters["amount"] ?: return@post call.respondText(
+                "Missing amount",
+                status = HttpStatusCode.BadRequest
+            )
+            val bookId = call.receive<Int>()
+            ShoppingCartService.replaceInCart(clientId.toInt(), bookId, amount.toInt());
+            call.respondText("Book added correctly", status = HttpStatusCode.Created)
+        }
         delete("{clientId}") {
             val clientId = call.parameters["clientId"] ?: return@delete call.respondText(
                 "Missing id",
@@ -39,6 +52,14 @@ fun Route.shoppingCartRoutes() {
             val bookId = call.receive<Int>()
             ShoppingCartService.removeFromCart(clientId.toInt(), bookId);
             call.respondText("Book removed correctly", status = HttpStatusCode.Created)
+        }
+        delete("{clientId}/all") {
+            val clientId = call.parameters["clientId"] ?: return@delete call.respondText(
+                "Missing id",
+                status = HttpStatusCode.BadRequest
+            )
+            ShoppingCartService.removeAllFromCart(clientId.toInt());
+            call.respondText("All removed correctly", status = HttpStatusCode.Created)
         }
     }
 }

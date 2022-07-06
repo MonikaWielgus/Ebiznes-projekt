@@ -22,6 +22,24 @@ class ShoppingCartService {
             }
         }
 
+        fun replaceInCart(clientId: Int, bookId: Int, amount: Int) {
+            val cart = ShoppingCartRepository.getShoppingCart(clientId)
+            val book = BookService.getBook(bookId)
+            if (book != null) {
+                for (bookWithAmount in cart?.products!!) {
+                    if (bookWithAmount.book.id == book.id) {
+                        if (amount <= 0) {
+                            cart.products.remove(bookWithAmount)
+                        }
+                        else {
+                            bookWithAmount.amount = amount
+                        }
+                        return
+                    }
+                }
+            }
+        }
+
         fun removeFromCart(clientId: Int, bookId: Int) {
             val cart = ShoppingCartRepository.getShoppingCart(clientId)
             val book = BookService.getBook(bookId)
@@ -29,9 +47,14 @@ class ShoppingCartService {
                 for (bookWithAmount in cart?.products!!) {
                     if (bookWithAmount.book.id == book.id) {
                         cart.products.remove(bookWithAmount)
+                        return
                     }
                 }
             }
+        }
+
+        fun removeAllFromCart(clientId: Int) {
+            ShoppingCartRepository.removeAllFromShoppingCart(clientId)
         }
 
         fun getShoppingCart(clientId: Int) : ShoppingCart? {

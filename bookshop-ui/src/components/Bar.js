@@ -16,7 +16,7 @@ const Bar = () => {
                         <Typography variant="h5" component="div" sx={{ flexGrow: 1, mr: 2}}>
                             BOOKSHOP
                         </Typography>
-                        <NavLink to='cart' style={{color: "white", fontSize: "large"}}>
+                        <NavLink to='/cart' style={{color: "white", fontSize: "large"}}>
                             <ShoppingCartIcon/>
                         </NavLink>
                     </Toolbar>

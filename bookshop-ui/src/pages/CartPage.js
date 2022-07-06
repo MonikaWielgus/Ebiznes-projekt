@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Bar from "../components/Bar";
 import Box from "@mui/material/Box";
-import {Grid} from "@mui/material";
+import {Grid, Typography} from "@mui/material";
 import {RemoteServer} from "../transport/RemoteServer";
-import {NavLink, useParams} from "react-router-dom";
-import {styled} from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+import {useParams} from "react-router-dom";
 import Button from "@mui/material/Button";
-import Book from "../components/Book";
+import BookInCart from "../components/BookInCart";
 
 const CartPage = () => {
 
@@ -16,8 +14,19 @@ const CartPage = () => {
 
     const remoteServer = new RemoteServer();
 
+    const removeAll = () => {
+        //TODO zmienić id
+        remoteServer
+            .removeAllFromProductsCart(1)
+            .then(response => {
+                if (response.status === 201) {
+                    window.location.reload()
+                }
+            })
+    };
+
     useEffect(() => {
-        // zrobic prawdziwe id
+        //TODO zrobic prawdziwe id
         remoteServer
             .getProductsFromCart(1)
             .then(json => {
@@ -29,28 +38,29 @@ const CartPage = () => {
         <React.Fragment>
             <Bar/>
             <br/>
-            <NavLink to={{
-                pathname:`/`
-            }}>
                 <Button
                     style={{ float: 'right', marginRight: '16px'}}
                     variant="contained"
                     size="medium"
+                    onClick={removeAll}
                 >
                     Wyczyść koszyk
                 </Button>
                 <br/><br/>
-            </NavLink>
             <br/>
+            {products.length !== 0 ?
             <Grid item sm={12}>
                 <Box sx={{ width: '100%' }}>
                     <Grid container rowSpacing={1}>
                         {products.map((product) => (
-                            <Book key={product.book.id} book = {product.book}/>
+                            <BookInCart key={product.book.id} book = {product.book} amount = {product.amount}/>
                         ))}
                     </Grid>
                 </Box>
-            </Grid>
+            </Grid> :
+            <Typography variant="h5" component="div" style={{textAlign: 'center'}}>
+                Koszyk jest pusty
+            </Typography> }
         </React.Fragment>
     );
 }
