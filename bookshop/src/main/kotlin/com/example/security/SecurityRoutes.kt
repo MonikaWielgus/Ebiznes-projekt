@@ -84,18 +84,15 @@ fun Route.configureSecurityRoutes(httpClient: HttpClient = applicationHttpClient
         }
     }
 
-    get("/cart/{clientId}") {
-        if (call.sessions.get<UserSession>() != null) {
-            val clientId = call.parameters["clientId"] ?: return@get call.respondText(
-                "Missing id",
-                status = HttpStatusCode.BadRequest
-            )
-            val cart = ShoppingCartService.getShoppingCart(clientId.toInt())
-            if (cart != null) {
-                call.respond(cart)
-            } else {
-                call.respondText("Shopping cart not found", status = HttpStatusCode.OK)
-            }
+    authenticate("auth-oauth-github") {
+        get("/auth_github") {
+            call.respondRedirect("/callback_github")
+        }
+
+        get("/callback_github") {
+            val principal: OAuthAccessTokenResponse.OAuth2? = call.authentication.principal()
+            call.sessions.set(UserSession(principal?.accessToken.toString(), 0))
+            call.respondRedirect("http://localhost:3000/")
         }
     }
 }

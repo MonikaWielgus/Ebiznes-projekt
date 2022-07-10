@@ -14,7 +14,7 @@ fun Application.configureAuthentication(httpClient: HttpClient = applicationHttp
         session<UserSession>("auth-session") {
             validate { it }
             challenge {
-                call.respondRedirect("/login")
+              //  call.respondRedirect("/api/auth")
             }
         }
         oauth("auth-oauth-google") {
@@ -33,5 +33,20 @@ fun Application.configureAuthentication(httpClient: HttpClient = applicationHttp
             }
             client = httpClient
         }
+        oauth("auth-oauth-github") {
+            urlProvider = { "http://localhost:8080/api/callback_github" }
+            providerLookup = {
+                OAuthServerSettings.OAuth2ServerSettings(
+                    name = "github",
+                    authorizeUrl = "https://github.com/login/oauth/authorize",
+                    accessTokenUrl = "https://github.com/login/oauth/access_token",
+                    requestMethod = HttpMethod.Post,
+                    clientId = "",
+                    clientSecret = "",
+                )
+            }
+            client = httpClient
+        }
     }
+
 }
