@@ -5,12 +5,15 @@ import com.example.routes.categoryRoutes
 import com.example.routes.shoppingCartRoutes
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 
 fun Application.configureRouting() {
 
     routing {
         categoryRoutes()
         bookRoutes()
-        shoppingCartRoutes()
+        authenticate("auth-session") {
+            shoppingCartRoutes()
+        }
     }
 }
