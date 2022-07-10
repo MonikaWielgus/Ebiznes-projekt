@@ -42,9 +42,10 @@ export class RemoteServer {
     async getProductsFromCart(id) {
         const url = `http://localhost:8080/cart/${id}`;
         const response = await fetch(url, {
+            credentials: "include",
             headers: await this.getHeaders()
         });
-        return response.json();
+        return response;
     }
 
     async addProductToCart(clientId, productId) {

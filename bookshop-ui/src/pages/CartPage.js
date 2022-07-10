@@ -29,8 +29,16 @@ const CartPage = () => {
         //TODO zrobic prawdziwe id
         remoteServer
             .getProductsFromCart(1)
-            .then(json => {
-                setProducts(json.products)
+            .then(response => {
+                if(response.status === 403) {
+                    console.log("403")
+                }
+                else {
+                    console.log("wszystko gra")
+                }
+            })
+            .then(async response => {
+                console.log(await response.json())
             })
     }, []);
 

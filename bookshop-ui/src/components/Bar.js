@@ -12,7 +12,6 @@ import {RemoteServer} from "../transport/RemoteServer";
 const Bar = () => {
     const [cookies] = useCookies(['user_session']);
 
-    const remoteServer = new RemoteServer();
 
     return (
         <Box sx={{ flexGrow: 1 }}>

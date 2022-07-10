@@ -1,8 +1,12 @@
 package com.example.security
 
 import com.example.clients.applicationHttpClient
+import com.example.plugins.UserInfo
 import com.example.plugins.UserSession
+import com.example.services.ShoppingCartService
 import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -26,12 +30,48 @@ fun Route.configureSecurityRoutes(httpClient: HttpClient = applicationHttpClient
     }
     authenticate("auth-oauth-google") {
         get("/auth") {
-            // Redirects to 'authorizeUrl' automatically
+            call.respondRedirect("http://localhost:3000/")
         }
         get("/callback") {
-            val principal: OAuthAccessTokenResponse.OAuth2? = call.principal()
+            val principal: OAuthAccessTokenResponse.OAuth2? = call.authentication.principal()
             call.sessions.set(UserSession(principal?.accessToken.toString(), 0))
             call.respondRedirect("http://localhost:3000/")
+        }
+    }
+
+    get("/auth/hello") {
+        val userSession: UserSession? = call.sessions.get()
+        if (userSession != null) {
+            val userInfo: UserInfo = httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+                headers {
+                    append(HttpHeaders.Authorization, "Bearer ${userSession.id}")
+                }
+            }.body()
+            call.respondText("Hello, ${userInfo.name}!")
+        } else {
+            call.respond(HttpStatusCode.Forbidden)
+        }
+    }
+
+    get("/auth/info") {
+        val userSession: UserSession? = call.sessions.get()
+        if (userSession != null) {
+            val userInfo: UserInfo = httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+                headers {
+                    append(HttpHeaders.Authorization, "Bearer ${userSession.id}")
+                }
+            }.body()
+            call.respond(userInfo)
+        } else {
+            call.respond(HttpStatusCode.Forbidden)
+        }
+    }
+
+    get("/auth/check") {
+        if (call.sessions.get<UserSession>() != null) {
+            call.respond(HttpStatusCode.OK)
+        } else {
+            call.respond(HttpStatusCode.Forbidden)
         }
     }
 
@@ -41,6 +81,21 @@ fun Route.configureSecurityRoutes(httpClient: HttpClient = applicationHttpClient
             call.respondRedirect("http://localhost:3000/")
         } else {
             call.respond(HttpStatusCode.Forbidden)
+        }
+    }
+
+    get("/cart/{clientId}") {
+        if (call.sessions.get<UserSession>() != null) {
+            val clientId = call.parameters["clientId"] ?: return@get call.respondText(
+                "Missing id",
+                status = HttpStatusCode.BadRequest
+            )
+            val cart = ShoppingCartService.getShoppingCart(clientId.toInt())
+            if (cart != null) {
+                call.respond(cart)
+            } else {
+                call.respondText("Shopping cart not found", status = HttpStatusCode.OK)
+            }
         }
     }
 }
