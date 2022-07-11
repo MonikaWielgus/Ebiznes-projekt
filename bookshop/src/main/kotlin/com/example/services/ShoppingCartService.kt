@@ -7,8 +7,9 @@ import com.example.repositories.ShoppingCartRepository
 class ShoppingCartService {
     companion object{
 
-        fun addToCart(clientId: Int, bookId: Int) {
-            val cart = ShoppingCartRepository.getShoppingCart(clientId)
+        fun addToCart(sessionId: String, bookId: Int) {
+            val userId = UserInfoService.getUserId(sessionId)
+            val cart = ShoppingCartRepository.getShoppingCart(userId)
             val book = BookService.getBook(bookId)
             if (book != null) {
                 for (bookWithAmount in cart?.products!!) {
@@ -22,8 +23,9 @@ class ShoppingCartService {
             }
         }
 
-        fun replaceInCart(clientId: Int, bookId: Int, amount: Int) {
-            val cart = ShoppingCartRepository.getShoppingCart(clientId)
+        fun replaceInCart(sessionId: String, bookId: Int, amount: Int) {
+            val userId = UserInfoService.getUserId(sessionId)
+            val cart = ShoppingCartRepository.getShoppingCart(userId)
             val book = BookService.getBook(bookId)
             if (book != null) {
                 for (bookWithAmount in cart?.products!!) {
@@ -40,8 +42,9 @@ class ShoppingCartService {
             }
         }
 
-        fun removeFromCart(clientId: Int, bookId: Int) {
-            val cart = ShoppingCartRepository.getShoppingCart(clientId)
+        fun removeFromCart(sessionId: String, bookId: Int) {
+            val userId = UserInfoService.getUserId(sessionId)
+            val cart = ShoppingCartRepository.getShoppingCart(userId)
             val book = BookService.getBook(bookId)
             if (book != null) {
                 for (bookWithAmount in cart?.products!!) {
@@ -53,12 +56,22 @@ class ShoppingCartService {
             }
         }
 
-        fun removeAllFromCart(clientId: Int) {
-            ShoppingCartRepository.removeAllFromShoppingCart(clientId)
+        fun removeAllFromCart(sessionId: String) {
+            val userId = UserInfoService.getUserId(sessionId)
+            ShoppingCartRepository.removeAllFromShoppingCart(userId)
         }
 
-        fun getShoppingCart(clientId: Int) : ShoppingCart? {
-            return ShoppingCartRepository.getShoppingCart(clientId)
+        fun getShoppingCart(sessionId: String) : ShoppingCart? {
+            val userId = UserInfoService.getUserId(sessionId)
+            return ShoppingCartRepository.getShoppingCart(userId)
+        }
+
+        fun addCartIfNotExists(sessionId: String) {
+            val userId = UserInfoService.getUserId(sessionId)
+            val cart = ShoppingCartRepository.getShoppingCart(userId)
+            if (cart == null) {
+                ShoppingCartRepository.addShoppingCart(userId)
+            }
         }
     }
 }

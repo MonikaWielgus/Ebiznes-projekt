@@ -1,6 +1,5 @@
 import Bar from "../components/Bar";
 import React from 'react';
-import GoogleLogin from'../buttons/google-sign-in.png';
 import GithubButton from "react-github-login-button";
 import GoogleButton from "react-google-button";
 

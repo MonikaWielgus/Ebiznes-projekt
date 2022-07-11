@@ -1,7 +1,8 @@
 package com.example.security
 
 import com.example.clients.applicationHttpClient
-import com.example.plugins.UserInfo
+import com.example.models.GithubUserInfo
+import com.example.models.GoogleUserInfo
 import com.example.plugins.UserSession
 import com.example.services.ShoppingCartService
 import io.ktor.client.*
@@ -36,13 +37,17 @@ fun Route.configureSecurityRoutes(httpClient: HttpClient = applicationHttpClient
             val principal: OAuthAccessTokenResponse.OAuth2? = call.authentication.principal()
             call.sessions.set(UserSession(principal?.accessToken.toString(), 0))
             call.respondRedirect("http://localhost:3000/")
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null) {
+                ShoppingCartService.addCartIfNotExists(userSession.id)
+            }
         }
     }
 
     get("/auth/hello") {
         val userSession: UserSession? = call.sessions.get()
         if (userSession != null) {
-            val userInfo: UserInfo = httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+            val userInfo: GoogleUserInfo = httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
                 headers {
                     append(HttpHeaders.Authorization, "Bearer ${userSession.id}")
                 }
@@ -56,7 +61,7 @@ fun Route.configureSecurityRoutes(httpClient: HttpClient = applicationHttpClient
     get("/auth/info") {
         val userSession: UserSession? = call.sessions.get()
         if (userSession != null) {
-            val userInfo: UserInfo = httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+            val userInfo: GoogleUserInfo = httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
                 headers {
                     append(HttpHeaders.Authorization, "Bearer ${userSession.id}")
                 }
@@ -93,6 +98,23 @@ fun Route.configureSecurityRoutes(httpClient: HttpClient = applicationHttpClient
             val principal: OAuthAccessTokenResponse.OAuth2? = call.authentication.principal()
             call.sessions.set(UserSession(principal?.accessToken.toString(), 0))
             call.respondRedirect("http://localhost:3000/")
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession != null) {
+                ShoppingCartService.addCartIfNotExists(userSession.id)
+            }
+        }
+        get("/auth/info_github") {
+            val userSession: UserSession? = call.sessions.get()
+            if (userSession != null) {
+                val userInfo: GithubUserInfo = httpClient.get("https://api.github.com/user") {
+                    headers {
+                        append(HttpHeaders.Authorization, "Bearer ${userSession.id}")
+                    }
+                }.body()
+                call.respond(userInfo)
+            } else {
+                call.respond(HttpStatusCode.Forbidden)
+            }
         }
     }
 }

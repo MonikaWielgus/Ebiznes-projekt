@@ -4,21 +4,10 @@ import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.sessions.*
 import io.ktor.util.*
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import java.io.File
 
 data class UserSession(val id: String, val count: Int) : Principal
 
-@Serializable
-data class UserInfo(
-    val id: String,
-    val name: String,
-    @SerialName("given_name") val givenName: String,
-    @SerialName("family_name") val familyName: String,
-    val picture: String,
-    val locale: String
-)
 
 fun Application.configureSessions() {
     install(Sessions) {

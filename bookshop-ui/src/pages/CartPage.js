@@ -3,7 +3,7 @@ import Bar from "../components/Bar";
 import Box from "@mui/material/Box";
 import {Grid, Typography} from "@mui/material";
 import {RemoteServer} from "../transport/RemoteServer";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Button from "@mui/material/Button";
 import BookInCart from "../components/BookInCart";
 
@@ -12,12 +12,12 @@ const CartPage = () => {
     const [products, setProducts] = useState([]);
     const { id } = useParams();
 
+    const navigate = useNavigate();
     const remoteServer = new RemoteServer();
 
     const removeAll = () => {
-        //TODO zmienić id
         remoteServer
-            .removeAllFromProductsCart(1)
+            .removeAllFromProductsCart()
             .then(response => {
                 if (response.status === 201) {
                     window.location.reload()
@@ -26,22 +26,17 @@ const CartPage = () => {
     };
 
     useEffect(() => {
-        //TODO zrobic prawdziwe id
         remoteServer
-            .getProductsFromCart(1)
-            .then(response => {
-                if(response.status === 403) {
-                    console.log("403")
-                }
-                else {
-                    console.log("wszystko gra")
-                }
-            })
+            .getProductsFromCart()
             .then(async response => {
-                console.log(await response.json())
+                if (response.status === 403) {
+                    navigate('/login')
+                } else {
+                    let result = JSON.parse(await response.text())
+                    setProducts(result.products)
+                }
             })
     }, []);
-
     return (
         <React.Fragment>
             <Bar/>

@@ -28,7 +28,7 @@ const BookInCart = (props) => {
         setAmount(event.target.value);
 
         remoteServer
-            .replaceProduct(1, book.id, event.target.value)
+            .replaceProduct(book.id, event.target.value)
             .then()
     };
 
@@ -37,9 +37,8 @@ const BookInCart = (props) => {
     }
 
     function removeBook() {
-        //TODO zmienić id
         remoteServer
-            .removeProductFromCart(1, book.id)
+            .removeProductFromCart( book.id)
             .then(response => {
                 if (response.status === 201) {
                     window.location.reload()

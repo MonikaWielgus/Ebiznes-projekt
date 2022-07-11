@@ -3,7 +3,7 @@ import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import {Collapse, Grid, IconButton, Typography} from '@mui/material';
 import Button from '@mui/material/Button';
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import {RemoteServer} from "../transport/RemoteServer";
@@ -24,6 +24,7 @@ const Book = (props) => {
         book
     } = props;
 
+    const navigate = useNavigate();
     const remoteServer = new RemoteServer();
     const [infoOpen, setInfoOpen] = React.useState(false);
 
@@ -33,14 +34,15 @@ const Book = (props) => {
 
     function addToCart() {
         remoteServer
-            .addProductToCart(1, book.id)
+            .addProductToCart(book.id)
             .then(async response => {
                 if (response.status === 201) {
                     setInfoOpen(true);
                     await sleep(1000);
                     setInfoOpen(false);
-                } else {
-                    console.log("coś poszło nie tak")
+                }
+                if (response.status === 403) {
+                    navigate('/login')
                 }
             });
     }

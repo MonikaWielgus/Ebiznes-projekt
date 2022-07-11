@@ -23,8 +23,8 @@ const BookPage = () => {
 
     const [book, setBook] = useState([]);
     const { id } = useParams();
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const remoteServer = new RemoteServer();
 
     const [infoOpen, setInfoOpen] = React.useState(false);
@@ -35,14 +35,15 @@ const BookPage = () => {
 
     function addToCart() {
         remoteServer
-            .addProductToCart(1, book.id)
+            .addProductToCart(book.id)
             .then(async response => {
                 if (response.status === 201) {
                     setInfoOpen(true);
                     await sleep(1000);
-                    navigate('/')
-                } else {
-                    console.log("coś poszło nie tak")
+                    setInfoOpen(false);
+                }
+                if (response.status === 403) {
+                    navigate('/login')
                 }
             });
     }

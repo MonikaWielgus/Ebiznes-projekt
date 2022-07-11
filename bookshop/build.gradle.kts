@@ -36,6 +36,7 @@ dependencies {
     implementation("io.ktor:ktor-client-okhttp:$ktor_version")
     implementation("io.ktor:ktor-server-sessions:$ktor_version")
     implementation("io.ktor:ktor-server-html-builder:$ktor_version")
+    implementation("io.ktor:ktor-client-core:$ktor_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

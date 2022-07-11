@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class ShoppingCart (
-    val clientId: Int,
+    val clientId: String,
     val products: MutableList<BookWithAmount>
 )

@@ -39,8 +39,8 @@ export class RemoteServer {
         return response.json();
     }
 
-    async getProductsFromCart(id) {
-        const url = `http://localhost:8080/cart/${id}`;
+    async getProductsFromCart() {
+        const url = `http://localhost:8080/cart`;
         const response = await fetch(url, {
             credentials: "include",
             headers: await this.getHeaders()
@@ -48,37 +48,41 @@ export class RemoteServer {
         return response;
     }
 
-    async addProductToCart(clientId, productId) {
-        const url = `http://localhost:8080/cart/${clientId}`;
+    async addProductToCart(productId) {
+        const url = `http://localhost:8080/cart`;
         return await fetch(url, {
             headers: await this.getHeaders(),
             method: 'post',
+            credentials: 'include',
             body: productId
         });
     }
 
-    async removeProductFromCart(clientId, productId) {
-        const url = `http://localhost:8080/cart/${clientId}`;
+    async removeProductFromCart(productId) {
+        const url = `http://localhost:8080/cart`;
         return await fetch(url, {
             headers: await this.getHeaders(),
+            credentials: 'include',
             method: 'delete',
             body: productId
         });
     }
 
-    async removeAllFromProductsCart(clientId) {
-        const url = `http://localhost:8080/cart/${clientId}/all`;
+    async removeAllFromProductsCart() {
+        const url = `http://localhost:8080/cart/all`;
         return await fetch(url, {
             headers: await this.getHeaders(),
-            method: 'delete'
+            method: 'delete',
+            credentials: 'include'
         });
     }
 
-    async replaceProduct(clientId, productId, amount) {
-        const url = `http://localhost:8080/cart/${clientId}/${amount}`;
+    async replaceProduct(productId, amount) {
+        const url = `http://localhost:8080/cart/${amount}`;
         return await fetch(url, {
             headers: await this.getHeaders(),
             method: 'post',
+            credentials: 'include',
             body: productId
         });
     }

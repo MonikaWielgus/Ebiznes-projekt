@@ -9,6 +9,7 @@ fun Application.configureCORS() {
         allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Put)
         allowMethod(HttpMethod.Post)
+        allowMethod(HttpMethod.Delete)
         exposeHeader(HttpHeaders.Authorization)
         exposeHeader(HttpHeaders.AccessControlAllowOrigin)
         allowHeader(HttpHeaders.Authorization)
