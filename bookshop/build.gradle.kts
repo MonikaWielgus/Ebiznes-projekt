@@ -37,6 +37,13 @@ dependencies {
     implementation("io.ktor:ktor-server-sessions:$ktor_version")
     implementation("io.ktor:ktor-server-html-builder:$ktor_version")
     implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("org.seleniumhq.selenium:selenium-java:4.+")
+    implementation("io.github.bonigarcia:webdrivermanager:5.+")
+    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
