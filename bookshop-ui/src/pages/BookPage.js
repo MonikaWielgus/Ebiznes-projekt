@@ -63,6 +63,7 @@ const BookPage = () => {
             <Box sx={{ width: '100%' }}>
                 <Collapse in={infoOpen}>
                     <Alert
+                        id={'book_added'}
                         action={
                             <IconButton
                                 aria-label="close"
@@ -83,34 +84,35 @@ const BookPage = () => {
             </Box>
             <Grid item sm={12}>
                 <Item>
-                    <Typography variant="h6" sx={{ width: '33%', flexShrink: 0 }}>
+                    <Typography id={'title_header_' + book.id} variant="h6" sx={{ width: '33%', flexShrink: 0 }}>
                         Tytuł
                     </Typography>
                     <Divider/>
-                    <Typography sx={{ color: 'text.secondary' }}>{book.title}</Typography>
+                    <Typography id={'book_title_' + book.id} sx={{ color: 'text.secondary' }}>{book.title}</Typography>
                 </Item>
                 <Item>
-                    <Typography variant="h6" sx={{ width: '33%', flexShrink: 0 }}>
+                    <Typography id={'author_header_' + book.id} variant="h6" sx={{ width: '33%', flexShrink: 0 }}>
                         Autor
                     </Typography>
                     <Divider/>
-                    <Typography sx={{ color: 'text.secondary' }}>{book.author}</Typography>
+                    <Typography id={'book_author_' + book.id} sx={{ color: 'text.secondary' }}>{book.author}</Typography>
                 </Item>
                 <Item>
-                    <Typography variant="h6" sx={{ width: '33%', flexShrink: 0 }}>
+                    <Typography id={'category_header_' + book.id} variant="h6" sx={{ width: '33%', flexShrink: 0 }}>
                         Kategoria
                     </Typography>
                     <Divider/>
-                    <Typography sx={{ color: 'text.secondary' }}>{book.category}</Typography>
+                    <Typography id={'book_category_' + book.id} sx={{ color: 'text.secondary' }}>{book.category}</Typography>
                 </Item>
                 <Item>
-                    <Typography variant="h6" sx={{ width: '33%', flexShrink: 0 }}>
+                    <Typography id={'price_header_' + book.id} variant="h6" sx={{ width: '33%', flexShrink: 0 }}>
                         Cena
                     </Typography>
                     <Divider/>
-                    <Typography sx={{ color: 'text.secondary' }}>{book.price}</Typography>
+                    <Typography id={'book_price_' + book.id} sx={{ color: 'text.secondary' }}>{book.price}</Typography>
                 </Item>
                     <Button
+                        id={'book_page_add_to_cart_' + book.id}
                         style={{ float: 'right', marginRight: '16px'}}
                         variant="contained"
                         size="small"

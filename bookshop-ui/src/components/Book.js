@@ -71,9 +71,10 @@ const Book = (props) => {
             </Collapse>
             </Box>
             <Grid item sm={12}>
-                <Item>
-                    <Typography>{book.title}</Typography>
+                <Item id={"book_" + props.book.id}>
+                    <Typography id={'book_panel_title_' + book.id}>{book.title}</Typography>
                         <Button
+                            id={'add_to_cart_icon_' + book.id}
                             style={{ float: 'right', marginRight: '16px'}}
                             variant="contained"
                             size="small"
@@ -81,10 +82,11 @@ const Book = (props) => {
                         >
                             <AddShoppingCartIcon/>
                         </Button>
-                    <NavLink to={{
-                        pathname:`/book/${book.id}`
+                    <NavLink
+                        to={{pathname:`/book/${book.id}`
                     }}>
                         <Button
+                            id={'book_info_icon_' + book.id}
                             style={{ float: 'right', marginRight: '16px'}}
                             variant="contained"
                             size="small"

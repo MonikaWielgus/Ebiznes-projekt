@@ -48,18 +48,18 @@ const BookInCart = (props) => {
 
     return (
         <React.Fragment>
-            <Grid item sm={12} style={{marginBottom: '16px'}}>
+            <Grid id={'book_cart_' + book.id} item sm={12} style={{marginBottom: '16px'}}>
                 <Card sx={{ minWidth: 600 }}>
                     <CardContent>
                         <Box style={{textAlign: "right"}} onClick={removeBook}>
                             <Button>
-                                <DeleteIcon fontSize="large" style={{color: "black"}}/>
+                                <DeleteIcon id={'delete_from_cart_' + book.id} fontSize="large" style={{color: "black"}}/>
                             </Button>
                         </Box>
-                        <Typography variant="h5" component="div">
+                        <Typography id={'book_in_cart_title_' + book.id} variant="h5" component="div">
                             {book.title}
                         </Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        <Typography id={'book_in_cart_author_' + book.id} sx={{ mb: 1.5 }} color="text.secondary">
                             {book.author}
                         </Typography>
                         <br/>
@@ -81,7 +81,7 @@ const BookInCart = (props) => {
                         </FormControl>
                         <br/>
                         <br/>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        <Typography id={'book_in_cart_price_' + book.id} sx={{ mb: 1.5 }} color="text.secondary">
                             {getPrice(book.price, moneyAmount)} zł
                         </Typography>
                     </CardContent>

@@ -23,7 +23,7 @@ const CategoryTab = (props) => {
     }, []);
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%' }} id={"tab_" + props.id}>
             <Grid container rowSpacing={1}>
                 {books.map((book) => (
                     <Book key={book.id} book = {book}/>

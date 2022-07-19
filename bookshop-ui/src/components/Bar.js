@@ -14,24 +14,24 @@ const Bar = () => {
 
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <NavLink to='/' style={{ textDecoration: 'none' }}>
+        <Box sx={{ flexGrow: 1 }} id={'bar'}>
+            <NavLink to='/' id='back_to_main_page' style={{ textDecoration: 'none' }}>
                 <AppBar
                     position="static"
                 >
                     <Toolbar>
-                        <Typography variant="h5" component="div" sx={{ flexGrow: 1, mr: 2}}>
+                        <Typography id={'title'} variant="h5" component="div" sx={{ flexGrow: 1, mr: 2}}>
                             BOOKSHOP
                         </Typography>
-                        <NavLink to='/cart' style={{color: "white", fontSize: "large"}}>
+                        <NavLink to='/cart' id='cart_icon' style={{color: "white", fontSize: "large"}}>
                             <ShoppingCartIcon/>
                         </NavLink>
                         {cookies.user_session !== undefined ?
-                            <NavLink to='/logout' style={{color: "white", fontSize: "large", marginLeft: '10px'}}>
+                            <NavLink to='/logout' id='logout_icon' style={{color: "white", fontSize: "large", marginLeft: '10px'}}>
                                 <LogoutIcon />
                             </NavLink>
                                 :
-                            <NavLink to='/login' style={{color: "white", fontSize: "large", marginLeft: '10px'}}>
+                            <NavLink to='/login' id='login_icon' style={{color: "white", fontSize: "large", marginLeft: '10px'}}>
                                 <LoginIcon/>
                             </NavLink>
                         }

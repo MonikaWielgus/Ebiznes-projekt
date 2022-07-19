@@ -26,9 +26,9 @@ const Menu = () => {
     }, []);
 
     return (
-        <Box sx={{ width: '100%', typography: 'body1' }}>
+        <Box  id = 'menu' sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Box id = 'tabs' sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <TabList onChange={handleChange}>
                         {categories.map((category) => (
                             <Tab

@@ -9,7 +9,7 @@ function LoginPage() {
         <React.Fragment>
             <Bar/>
             <a href='http://localhost:8080/api/auth' rel='noopener noreferrer' style = {{textDecoration: "none"}}>
-                <GoogleButton style={{
+                <GoogleButton id = 'google_button' style={{
                     margin: "auto",
                     marginTop: "200px",
                     display: "flex",
@@ -17,7 +17,7 @@ function LoginPage() {
                 }}/>
             </a>
             <a href='http://localhost:8080/api/auth_github' rel='noopener noreferrer' style = {{textDecoration: "none"}}>
-                <GithubButton style={{
+                <GithubButton id = 'github_button' style={{
                     margin: "auto",
                     marginTop: "20px",
                     display: "flex",

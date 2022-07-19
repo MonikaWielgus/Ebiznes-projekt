@@ -10,7 +10,6 @@ import BookInCart from "../components/BookInCart";
 const CartPage = () => {
 
     const [products, setProducts] = useState([]);
-    const { id } = useParams();
 
     const navigate = useNavigate();
     const remoteServer = new RemoteServer();
@@ -42,6 +41,7 @@ const CartPage = () => {
             <Bar/>
             <br/>
                 <Button
+                    id={'clean_cart'}
                     style={{ float: 'right', marginRight: '16px'}}
                     variant="contained"
                     size="medium"
@@ -61,7 +61,7 @@ const CartPage = () => {
                     </Grid>
                 </Box>
             </Grid> :
-            <Typography variant="h5" component="div" style={{textAlign: 'center'}}>
+            <Typography id={'empty_cart'} variant="h5" component="div" style={{textAlign: 'center'}}>
                 Koszyk jest pusty
             </Typography> }
         </React.Fragment>
