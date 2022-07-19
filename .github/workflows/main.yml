@@ -18,5 +18,7 @@ jobs:
                   java-version: 11
             - name: Grant execute permission for gradlew
               run: chmod +x bookshop/gradlew
+            - name: Change catalog
+              run: cd bookshop
             - name: Build with Gradle
               run: ./gradlew build
