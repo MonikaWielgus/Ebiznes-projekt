@@ -20,5 +20,7 @@ jobs:
               run: chmod +x bookshop/gradlew
             - name: Change catalog
               run: cd bookshop
+            - name: Show files
+              run: ls -l
             - name: Build with Gradle
               run: ./gradlew build
