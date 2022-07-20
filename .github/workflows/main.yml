@@ -20,4 +20,4 @@ jobs:
               run: chmod +x bookshop/gradlew
             - name: Build with Gradle   
               working-directory: ./bookshop
-              run: ./gradlew build
+              run: ./gradlew -x test
