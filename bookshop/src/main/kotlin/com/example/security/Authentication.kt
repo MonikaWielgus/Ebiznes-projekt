@@ -26,8 +26,8 @@ fun Application.configureAuthentication(httpClient: HttpClient = applicationHttp
                     authorizeUrl = "https://accounts.google.com/o/oauth2/auth",
                     accessTokenUrl = "https://accounts.google.com/o/oauth2/token",
                     requestMethod = HttpMethod.Post,
-                    clientId = "",
-                    clientSecret = "",
+                    clientId = System.getenv("GOOGLE_CLIENT_ID"),
+                    clientSecret = System.getenv("GOOGLE_CLIENT_SECRET"),
                     defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile")
                 )
             }
@@ -41,8 +41,8 @@ fun Application.configureAuthentication(httpClient: HttpClient = applicationHttp
                     authorizeUrl = "https://github.com/login/oauth/authorize",
                     accessTokenUrl = "https://github.com/login/oauth/access_token",
                     requestMethod = HttpMethod.Post,
-                    clientId = "",
-                    clientSecret = "",
+                    clientId = System.getenv("GITHUB_CLIENT_ID"),
+                    clientSecret = System.getenv("GITHUB_CLIENT_SECRET"),
                 )
             }
             client = httpClient

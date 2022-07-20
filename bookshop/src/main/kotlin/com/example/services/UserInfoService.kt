@@ -45,7 +45,7 @@ class UserInfoService {
             var isGithub = false
             runBlocking {
                 val client = HttpClient()
-                val httpResponse: HttpResponse = client.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+                val httpResponse: HttpResponse = client.get("https://api.github.com/user") {
                     headers {
                         append(HttpHeaders.Authorization, "Bearer $sessionId")
                     }
