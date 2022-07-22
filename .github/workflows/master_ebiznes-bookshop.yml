@@ -20,13 +20,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '11'
-          
-      - name: Grant execute permission for gradlew
-        run: chmod +x bookshop/gradlew
 
-      - name: Build with Gradle   
-        working-directory: ./bookshop
-        run: ./gradlew -x test
+      - name: Build with Maven
+        run: mvn clean install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -53,5 +49,5 @@ jobs:
         with:
           app-name: 'Ebiznes-bookshop'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3C36F3683DF74544BAAF681858375996 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_16AFF5D7C8B1439AB03DAC4A846D1B6D }}
           package: '*.jar'
