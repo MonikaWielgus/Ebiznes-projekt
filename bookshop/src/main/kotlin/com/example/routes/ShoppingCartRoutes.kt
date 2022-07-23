@@ -26,6 +26,16 @@ fun Route.shoppingCartRoutes() {
                 }
             }
         }
+        get("sum") {
+            val userSession = call.sessions.get<UserSession>()
+            if (userSession == null) {
+                call.respond(HttpStatusCode.Forbidden)
+            }
+            else {
+                val sum = ShoppingCartService.getSum(userSession.id)
+                call.respond(sum)
+            }
+        }
         post {
             val userSession = call.sessions.get<UserSession>()
             if (userSession == null) {

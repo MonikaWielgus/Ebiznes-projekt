@@ -2,14 +2,15 @@ package com.example.security
 
 import com.example.clients.applicationHttpClient
 import com.example.plugins.UserSession
+import io.github.cdimascio.dotenv.dotenv
 import io.ktor.client.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
-import io.ktor.server.response.*
 import io.ktor.server.sessions.*
 
 fun Application.configureAuthentication(httpClient: HttpClient = applicationHttpClient) {
+    val dotenv = dotenv()
     install(Authentication) {
         session<UserSession>("auth-session") {
             validate { it }
@@ -26,8 +27,8 @@ fun Application.configureAuthentication(httpClient: HttpClient = applicationHttp
                     authorizeUrl = "https://accounts.google.com/o/oauth2/auth",
                     accessTokenUrl = "https://accounts.google.com/o/oauth2/token",
                     requestMethod = HttpMethod.Post,
-                    clientId = System.getenv("GOOGLE_CLIENT_ID"),
-                    clientSecret = System.getenv("GOOGLE_CLIENT_SECRET"),
+                    clientId = dotenv["GOOGLE_CLIENT_ID"],
+                    clientSecret = dotenv["GOOGLE_CLIENT_SECRET"],
                     defaultScopes = listOf("https://www.googleapis.com/auth/userinfo.profile")
                 )
             }
@@ -41,8 +42,8 @@ fun Application.configureAuthentication(httpClient: HttpClient = applicationHttp
                     authorizeUrl = "https://github.com/login/oauth/authorize",
                     accessTokenUrl = "https://github.com/login/oauth/access_token",
                     requestMethod = HttpMethod.Post,
-                    clientId = System.getenv("GITHUB_CLIENT_ID"),
-                    clientSecret = System.getenv("GITHUB_CLIENT_SECRET"),
+                    clientId = dotenv["GITHUB_CLIENT_ID"],
+                    clientSecret = dotenv["GITHUB_CLIENT_SECRET"],
                 )
             }
             client = httpClient

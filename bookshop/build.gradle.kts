@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+    implementation ("com.stripe:stripe-java:19.1.0")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
@@ -40,6 +41,7 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:4.+")
     implementation("io.github.bonigarcia:webdrivermanager:5.+")
     implementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    implementation("io.github.cdimascio:dotenv-kotlin:6.3.1")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

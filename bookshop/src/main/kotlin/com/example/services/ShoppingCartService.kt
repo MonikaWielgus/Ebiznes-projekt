@@ -66,6 +66,16 @@ class ShoppingCartService {
             return ShoppingCartRepository.getShoppingCart(userId)
         }
 
+        fun getSum(sessionId: String) : Double {
+            val userId = UserInfoService.getUserId(sessionId)
+            val cart = ShoppingCartRepository.getShoppingCart(userId) ?: return 0.0
+            var sum = 0.0
+            for (item in cart.products) {
+                sum += (item.book.price*item.amount)
+            }
+            return sum
+        }
+
         fun addCartIfNotExists(sessionId: String) {
             val userId = UserInfoService.getUserId(sessionId)
             val cart = ShoppingCartRepository.getShoppingCart(userId)

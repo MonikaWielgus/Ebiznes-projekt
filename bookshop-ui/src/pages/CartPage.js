@@ -24,6 +24,10 @@ const CartPage = () => {
             })
     };
 
+    const pay = () => {
+        navigate(`/payment`)
+    };
+
     useEffect(() => {
         remoteServer
             .getProductsFromCart()
@@ -60,7 +64,16 @@ const CartPage = () => {
                         ))}
                     </Grid>
                 </Box>
-            </Grid> :
+                <Button
+                    style={{ float: 'right', marginRight: '16px'}}
+                    variant="contained"
+                    size="medium"
+                    onClick={pay}
+                >
+                    Zapłać
+                </Button>
+            </Grid>
+                :
             <Typography id={'empty_cart'} variant="h5" component="div" style={{textAlign: 'center'}}>
                 Koszyk jest pusty
             </Typography> }

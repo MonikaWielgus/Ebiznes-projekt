@@ -5,6 +5,7 @@ import BookPage from "./pages/BookPage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
+import PaymentPage from "./pages/PaymentPage";
 
 function App() {
   return (
@@ -15,9 +16,9 @@ function App() {
             <Route exact path="/cart" element={<CartPage/>}/>
             <Route exact path="/login" element={<LoginPage/>}/>
             <Route exact path="/logout" element={<LogoutPage/>}/>
+            <Route exact path="/payment" element={<PaymentPage/>}/>
         </Routes>
       </Router>
   );
 }
-
 export default App;

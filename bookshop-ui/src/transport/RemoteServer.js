@@ -1,3 +1,5 @@
+
+
 export class RemoteServer {
 
     async getHeaders() {
@@ -48,6 +50,15 @@ export class RemoteServer {
         return response;
     }
 
+    async getSum() {
+        const url = `http://localhost:8080/cart/sum`
+        const response = await fetch(url, {
+            credentials: "include",
+            headers: await this.getHeaders()
+        });
+        return response;
+    }
+
     async addProductToCart(productId) {
         const url = `http://localhost:8080/cart`;
         return await fetch(url, {
@@ -85,5 +96,18 @@ export class RemoteServer {
             credentials: 'include',
             body: productId
         });
+    }
+
+    async pay(id, price) {
+        const url = `http://localhost:8080/payment/charge`
+        let body = {}
+        body.creditCardTokenId = id
+        body.value = price
+        return await fetch(url, {
+            headers: await this.getHeaders(),
+            method: 'post',
+            credentials: 'include',
+            body: JSON.stringify(body)
+        })
     }
 }
