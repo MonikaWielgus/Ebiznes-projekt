@@ -43,7 +43,7 @@ export class RemoteServer {
 
     async getProductsFromCart() {
         const url = `http://localhost:8080/cart`;
-        return await fetch(url, {
+        return fetch(url, {
             credentials: "include",
             headers: await this.getHeaders()
         });
@@ -51,7 +51,7 @@ export class RemoteServer {
 
     async getSum() {
         const url = `http://localhost:8080/cart/sum`
-        return await fetch(url, {
+        return fetch(url, {
             credentials: "include",
             headers: await this.getHeaders()
         });

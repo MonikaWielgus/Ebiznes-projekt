@@ -13,6 +13,10 @@ import java.time.Duration
 class TestAmazonCart {
 
     private val BASE_URL = "http://localhost:3000"
+    private val firstBookTitle = "Jakaś książka"
+    private val firstBookAuthor = "Jakiś autor"
+    private val actualFirstBookPrice = "11.59 zł"
+    private val actualSecondBookPrice = "20.30 zł"
 
     private lateinit var driver: WebDriver
 
@@ -209,7 +213,7 @@ class TestAmazonCart {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_panel_title_1")))
         val titleDisplayed = driver.findElement(By.id("book_panel_title_1"))
 
-        val expectedTitle = "Jakaś książka"
+        val expectedTitle = firstBookTitle
         val actualTitle = titleDisplayed.text
 
         Assertions.assertEquals(expectedTitle, actualTitle)
@@ -242,11 +246,11 @@ class TestAmazonCart {
         Assertions.assertTrue(titleHeader.isDisplayed)
         Assertions.assertEquals("Tytuł", titleHeader.text)
         Assertions.assertTrue(title.isDisplayed)
-        Assertions.assertEquals("Jakaś książka", title.text)
+        Assertions.assertEquals(firstBookTitle, title.text)
         Assertions.assertTrue(authorHeader.isDisplayed)
         Assertions.assertEquals("Autor", authorHeader.text)
         Assertions.assertTrue(author.isDisplayed)
-        Assertions.assertEquals("Jakiś autor", author.text)
+        Assertions.assertEquals(firstBookAuthor, author.text)
         Assertions.assertTrue(categoryHeader.isDisplayed)
         Assertions.assertEquals("Kategoria", categoryHeader.text)
         Assertions.assertTrue(category.isDisplayed)
@@ -254,7 +258,7 @@ class TestAmazonCart {
         Assertions.assertTrue(priceHeader.isDisplayed)
         Assertions.assertEquals("Cena", priceHeader.text)
         Assertions.assertTrue(price.isDisplayed)
-        Assertions.assertEquals("11.59", price.text)
+        Assertions.assertEquals(actualFirstBookPrice, price.text)
         Assertions.assertTrue(addToCartButton.isDisplayed)
     }
 
@@ -379,12 +383,12 @@ class TestAmazonCart {
 
         Assertions.assertTrue(bookInCartDisplayed)
         Assertions.assertTrue(bookTitle.isDisplayed)
-        Assertions.assertEquals("Jakaś książka", bookTitle.text)
+        Assertions.assertEquals(firstBookTitle, bookTitle.text)
         Assertions.assertTrue(bookAuthor.isDisplayed)
-        Assertions.assertEquals("Jakiś autor", bookAuthor.text)
+        Assertions.assertEquals(firstBookAuthor, bookAuthor.text)
         Assertions.assertTrue(selectAmount.isDisplayed)
         Assertions.assertTrue(bookPrice.isDisplayed)
-        Assertions.assertEquals("11.59 zł", bookPrice.text)
+        Assertions.assertEquals(actualFirstBookPrice, bookPrice.text)
 
         cleanCart()
 
@@ -435,8 +439,8 @@ class TestAmazonCart {
 
         Assertions.assertTrue(firstBookInCartDisplayed)
         Assertions.assertTrue(secondBookInCartDisplayed)
-        Assertions.assertEquals("11.59 zł", firstBookPrice.text)
-        Assertions.assertEquals("20.30 zł", secondBookPrice.text)
+        Assertions.assertEquals(actualFirstBookPrice, firstBookPrice.text)
+        Assertions.assertEquals(actualSecondBookPrice, secondBookPrice.text)
 
         cleanCart()
 
@@ -505,12 +509,12 @@ class TestAmazonCart {
 
         Assertions.assertTrue(bookInCartDisplayed)
         Assertions.assertTrue(bookTitle.isDisplayed)
-        Assertions.assertEquals("Jakaś książka", bookTitle.text)
+        Assertions.assertEquals(firstBookTitle, bookTitle.text)
         Assertions.assertTrue(bookAuthor.isDisplayed)
-        Assertions.assertEquals("Jakiś autor", bookAuthor.text)
+        Assertions.assertEquals(firstBookAuthor, bookAuthor.text)
         Assertions.assertTrue(selectAmount.isDisplayed)
         Assertions.assertTrue(bookPrice.isDisplayed)
-        Assertions.assertEquals("11.59 zł", bookPrice.text)
+        Assertions.assertEquals(actualFirstBookPrice, bookPrice.text)
 
         cleanCart()
 
@@ -540,8 +544,8 @@ class TestAmazonCart {
 
         Assertions.assertTrue(firstBookInCartDisplayed)
         Assertions.assertTrue(secondBookInCartDisplayed)
-        Assertions.assertEquals("11.59 zł", firstBookPrice.text)
-        Assertions.assertEquals("20.30 zł", secondBookPrice.text)
+        Assertions.assertEquals(actualFirstBookPrice, firstBookPrice.text)
+        Assertions.assertEquals(actualSecondBookPrice, secondBookPrice.text)
 
         val deleteFromCart = driver.findElement(By.id("delete_from_cart_1"))
         deleteFromCart.click()
@@ -549,7 +553,7 @@ class TestAmazonCart {
         secondBookPrice = driver.findElement(By.id("book_in_cart_price_2"))
 
         Assertions.assertTrue(secondBookInCartDisplayed)
-        Assertions.assertEquals("20.30 zł", secondBookPrice.text)
+        Assertions.assertEquals(actualSecondBookPrice, secondBookPrice.text)
 
         cleanCart()
 
@@ -617,12 +621,12 @@ class TestAmazonCart {
 
         Assertions.assertTrue(bookInCartDisplayed)
         Assertions.assertTrue(bookTitle.isDisplayed)
-        Assertions.assertEquals("Jakaś książka", bookTitle.text)
+        Assertions.assertEquals(firstBookTitle, bookTitle.text)
         Assertions.assertTrue(bookAuthor.isDisplayed)
-        Assertions.assertEquals("Jakiś autor", bookAuthor.text)
+        Assertions.assertEquals(firstBookAuthor, bookAuthor.text)
         Assertions.assertTrue(selectAmount.isDisplayed)
         Assertions.assertTrue(bookPrice.isDisplayed)
-        Assertions.assertEquals("11.59 zł", bookPrice.text)
+        Assertions.assertEquals(actualFirstBookPrice, bookPrice.text)
 
         logout()
         wait.until(ExpectedConditions.elementToBeClickable(By.id("login_icon")))
@@ -642,12 +646,12 @@ class TestAmazonCart {
 
         Assertions.assertTrue(bookInCartDisplayed)
         Assertions.assertTrue(bookTitle.isDisplayed)
-        Assertions.assertEquals("Jakaś książka", bookTitle.text)
+        Assertions.assertEquals(firstBookTitle, bookTitle.text)
         Assertions.assertTrue(bookAuthor.isDisplayed)
-        Assertions.assertEquals("Jakiś autor", bookAuthor.text)
+        Assertions.assertEquals(firstBookAuthor, bookAuthor.text)
         Assertions.assertTrue(selectAmount.isDisplayed)
         Assertions.assertTrue(bookPrice.isDisplayed)
-        Assertions.assertEquals("11.59 zł", bookPrice.text)
+        Assertions.assertEquals(actualFirstBookPrice, bookPrice.text)
 
         cleanCart()
         logout()
