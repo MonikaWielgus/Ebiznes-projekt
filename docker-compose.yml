@@ -1,0 +1,15 @@
+name: monikaebiznesbookshop
+services:
+  bookshop-ui:
+    build:
+      context: bookshop-ui
+      target: bookshop
+    ports:
+      - 3000:3000
+
+  bookshop:
+    build:
+      context: bookshop
+      target: bookshop
+    ports:
+      - 8080:8080
