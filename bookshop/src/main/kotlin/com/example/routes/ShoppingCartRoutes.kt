@@ -28,13 +28,9 @@ fun Route.shoppingCartRoutes() {
         }
         get("sum") {
             val userSession = call.sessions.get<UserSession>()
-            if (userSession == null) {
-                call.respond(HttpStatusCode.Forbidden)
-            }
-            else {
-                val sum = ShoppingCartService.getSum(userSession.id)
-                call.respond(sum)
-            }
+
+            val sum = ShoppingCartService.getSum(userSession?.id!!)
+            call.respond(sum)
         }
         post {
             val userSession = call.sessions.get<UserSession>()
@@ -49,39 +45,24 @@ fun Route.shoppingCartRoutes() {
         }
         post("{amount}") {
             val userSession = call.sessions.get<UserSession>()
-            if (userSession == null) {
-                call.respond(HttpStatusCode.Forbidden)
-            }
-            else {
-                val amount = call.parameters["amount"] ?: return@post call.respondText(
-                    "Missing amount",
-                    status = HttpStatusCode.BadRequest
-                )
-                val bookId = call.receive<Int>()
-                ShoppingCartService.replaceInCart(userSession.id, bookId, amount.toInt())
-                call.respondText("Book added correctly", status = HttpStatusCode.Created)
-            }
+            val amount = call.parameters["amount"] ?: return@post call.respondText(
+                "Missing amount",
+                status = HttpStatusCode.BadRequest
+            )
+            val bookId = call.receive<Int>()
+            ShoppingCartService.replaceInCart(userSession?.id!!, bookId, amount.toInt())
+            call.respondText("Book added correctly", status = HttpStatusCode.Created)
         }
         delete {
             val userSession = call.sessions.get<UserSession>()
-            if (userSession == null) {
-                call.respond(HttpStatusCode.Forbidden)
-            }
-            else {
-                val bookId = call.receive<Int>()
-                ShoppingCartService.removeFromCart(userSession.id, bookId)
-                call.respondText("Book removed correctly", status = HttpStatusCode.Created)
-            }
+            val bookId = call.receive<Int>()
+            ShoppingCartService.removeFromCart(userSession?.id!!, bookId)
+            call.respondText("Book removed correctly", status = HttpStatusCode.Created)
         }
         delete("all") {
             val userSession = call.sessions.get<UserSession>()
-            if (userSession == null) {
-                call.respond(HttpStatusCode.Forbidden)
-            }
-            else {
-                ShoppingCartService.removeAllFromCart(userSession.id)
-                call.respondText("All removed correctly", status = HttpStatusCode.Created)
-            }
+            ShoppingCartService.removeAllFromCart(userSession?.id!!)
+            call.respondText("All removed correctly", status = HttpStatusCode.Created)
         }
     }
 }

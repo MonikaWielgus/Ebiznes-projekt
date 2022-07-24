@@ -11,7 +11,7 @@ const Menu = () => {
     const [value, setValue] = React.useState("1");
     const [categories, setCategories] = useState([]);
 
-    const handleChange = (event, newValue) => {
+    const handleChange = (_event, newValue) => {
         setValue(newValue);
     };
 

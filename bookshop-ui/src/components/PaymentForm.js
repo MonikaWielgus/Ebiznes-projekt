@@ -17,11 +17,6 @@ const PaymentForm = () => {
     const removeAll = () => {
         remoteServer
             .removeAllFromProductsCart()
-            .then(response => {
-                if (response.status === 201) {
-
-                }
-            })
     };
 
     const sendForm = async (values) => {

@@ -1,13 +1,12 @@
 import React from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import {IconButton, Toolbar, Typography} from "@mui/material";
+import {Toolbar, Typography} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCartOutlined';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useCookies } from 'react-cookie';
-import {RemoteServer} from "../transport/RemoteServer";
 
 const Bar = () => {
     const [cookies] = useCookies(['user_session']);

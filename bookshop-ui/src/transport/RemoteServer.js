@@ -43,25 +43,23 @@ export class RemoteServer {
 
     async getProductsFromCart() {
         const url = `http://localhost:8080/cart`;
-        const response = await fetch(url, {
+        return await fetch(url, {
             credentials: "include",
             headers: await this.getHeaders()
         });
-        return response;
     }
 
     async getSum() {
         const url = `http://localhost:8080/cart/sum`
-        const response = await fetch(url, {
+        return await fetch(url, {
             credentials: "include",
             headers: await this.getHeaders()
         });
-        return response;
     }
 
     async addProductToCart(productId) {
         const url = `http://localhost:8080/cart`;
-        return await fetch(url, {
+        return fetch(url, {
             headers: await this.getHeaders(),
             method: 'post',
             credentials: 'include',
@@ -71,7 +69,7 @@ export class RemoteServer {
 
     async removeProductFromCart(productId) {
         const url = `http://localhost:8080/cart`;
-        return await fetch(url, {
+        return fetch(url, {
             headers: await this.getHeaders(),
             credentials: 'include',
             method: 'delete',
@@ -81,7 +79,7 @@ export class RemoteServer {
 
     async removeAllFromProductsCart() {
         const url = `http://localhost:8080/cart/all`;
-        return await fetch(url, {
+        return fetch(url, {
             headers: await this.getHeaders(),
             method: 'delete',
             credentials: 'include'
@@ -90,7 +88,7 @@ export class RemoteServer {
 
     async replaceProduct(productId, amount) {
         const url = `http://localhost:8080/cart/${amount}`;
-        return await fetch(url, {
+        return fetch(url, {
             headers: await this.getHeaders(),
             method: 'post',
             credentials: 'include',
@@ -103,7 +101,7 @@ export class RemoteServer {
         let body = {}
         body.creditCardTokenId = id
         body.value = price
-        return await fetch(url, {
+        return fetch(url, {
             headers: await this.getHeaders(),
             method: 'post',
             credentials: 'include',

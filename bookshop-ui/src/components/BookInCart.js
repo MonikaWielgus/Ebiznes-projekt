@@ -32,8 +32,8 @@ const BookInCart = (props) => {
             .then()
     };
 
-    const getPrice = (price, amount) => {
-        return (price*amount).toFixed(2)
+    const getPrice = (price, amountOfBooks) => {
+        return (price*amountOfBooks).toFixed(2)
     }
 
     function removeBook() {

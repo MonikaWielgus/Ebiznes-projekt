@@ -1,9 +1,7 @@
 import Bar from "../components/Bar";
 import React from 'react';
-import LogoutIcon from "@mui/icons-material/Logout";
-import {Grid, IconButton, Typography} from "@mui/material";
+import {Grid, Typography} from "@mui/material";
 import Box from "@mui/material/Box";
-import BookInCart from "../components/BookInCart";
 import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 

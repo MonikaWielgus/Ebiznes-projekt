@@ -3,7 +3,7 @@ import Bar from "../components/Bar";
 import Box from "@mui/material/Box";
 import {Grid, Typography} from "@mui/material";
 import {RemoteServer} from "../transport/RemoteServer";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import BookInCart from "../components/BookInCart";
 

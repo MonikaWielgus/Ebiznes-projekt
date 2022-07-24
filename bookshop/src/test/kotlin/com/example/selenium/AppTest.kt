@@ -17,17 +17,17 @@ class TestAmazonCart {
     private lateinit var driver: WebDriver
 
     @BeforeEach
-    fun `open browser`() {
+    fun openBrowser() {
         driver = WebDriverManager.chromedriver().create()
     }
 
     @AfterEach
-    fun `close browser`() {
+    fun closeBrowser() {
         driver.close()
     }
 
     @Test
-    fun `title visible`() {
+    fun titleVisible() {
         driver.get(BASE_URL)
         val titleVisible = driver.findElement(By.id("title")).isDisplayed
 
@@ -35,7 +35,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `bar visible on main page`() {
+    fun barVisibleOnMainPage() {
         driver.get(BASE_URL)
         val barVisible = driver.findElement(By.id("bar")).isDisplayed
 
@@ -43,7 +43,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `bar visible on cart page`() {
+    fun barVisibleOnCartPage() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(2))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("cart_icon")))
@@ -56,7 +56,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `bar visible on book page`() {
+    fun barVisibleOnBookPage() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(2))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_info_icon_1")))
@@ -69,7 +69,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `open login page`() {
+    fun openLoginPage() {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("login_icon")))
@@ -83,7 +83,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `open shopping cart page when not logged in`() {
+    fun openShoppingCartPageWhenNotLoggedIn() {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("cart_icon")))
@@ -97,7 +97,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `login buttons show up on login page`() {
+    fun loginButtonsShowUpOnLoginPage() {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("login_icon")))
@@ -111,7 +111,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `go back to main page from login page` () {
+    fun goBackToMainPageFromLoginPage () {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("login_icon")))
@@ -127,7 +127,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `menu is rendered`() {
+    fun menuIsRendered() {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("menu")))
@@ -137,7 +137,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `tabList is rendered` () {
+    fun tabListIsRendered () {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("tabs")))
@@ -147,7 +147,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `tabs are rendered` () {
+    fun tabsAreRendered () {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div/div[2]/div[1]/div/div/div/button[1]")))
@@ -161,7 +161,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `correct tab is displayed` () {
+    fun correctTabIsDisplayed () {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("tab_1")))
@@ -171,7 +171,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `change tab works` () {
+    fun changeTabWorks () {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("tab_1")))
@@ -189,7 +189,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `books in category tab are rendered` () {
+    fun booksInCategoryTabAreRendered () {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_1")))
@@ -203,7 +203,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `book title displays correctly` () {
+    fun bookTitleDisplaysCorrectly () {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_panel_title_1")))
@@ -216,7 +216,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `book page renders correctly` () {
+    fun bookPageRendersCorrectly () {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_info_icon_1")))
@@ -259,7 +259,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `add to cart from category page when not logged in`() {
+    fun addToCartFromCategoryPageWhenNotLoggedIn() {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("add_to_cart_icon_1")))
@@ -273,7 +273,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `add to cart from book page when not logged in`() {
+    fun addToCartFromBookPageWhenNotLoggedIn() {
         driver.get(BASE_URL)
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_info_icon_1")))
@@ -290,7 +290,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `test google log in` () {
+    fun testGoogleLogIn () {
         googleLogin()
         val actualUrl = driver.currentUrl
 
@@ -299,7 +299,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `test github log in` () {
+    fun testGithubLogIn () {
         githubLogin()
         val actualUrl = driver.currentUrl
 
@@ -308,7 +308,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `test google log out` () {
+    fun testGoogleLogOut () {
         googleLogin()
         logout()
         val actualUrl = driver.currentUrl
@@ -317,7 +317,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `test github log out` () {
+    fun testGithubLogOut () {
         githubLogin()
         logout()
         val actualUrl = driver.currentUrl
@@ -326,7 +326,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `log out visible when being logged in with google`() {
+    fun logOutVisibleWhenBeingLoggedInWithGoogle() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("logout_icon")))
@@ -337,7 +337,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `log out visible when being logged in with github`() {
+    fun logOutVisibleWhenBeingLoggedInWithGithub() {
         githubLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(1))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("logout_icon")))
@@ -348,7 +348,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `empty cart when being logged in`() {
+    fun emptyCartWhenBeingLoggedIn() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(2))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("cart_icon")))
@@ -361,7 +361,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `add to cart and clean cart`() {
+    fun addToCartAndCleanCart() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(3))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("add_to_cart_icon_1")))
@@ -396,7 +396,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `add to cart and remove from cart`() {
+    fun addToCartAndRemoveFromCart() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(3))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("add_to_cart_icon_1")))
@@ -416,7 +416,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `add two different books to cart and remove`() {
+    fun addTwoDifferentBooksToCartAndRemove() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(3))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("add_to_cart_icon_1")))
@@ -448,7 +448,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `add two different books twice to cart and remove`() {
+    fun addTwoDifferentBooksTwiceToCartAndRemove() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(3))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("add_to_cart_icon_1")))
@@ -482,7 +482,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `add to cart from info page`() {
+    fun addToCartFromInfoPage() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(3))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_info_icon_1")))
@@ -521,7 +521,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `remove only one book from cart`() {
+    fun removeOnlyOneBookFromCart() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(3))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("add_to_cart_icon_1")))
@@ -560,7 +560,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `alert displayed when book added from book page`() {
+    fun alertDisplayedWhenBookAddedFromBookPage() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(3))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_info_icon_1")))
@@ -579,7 +579,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `alert not displayed when book not added from book page`() {
+    fun alertNotDisplayedWhenBookNotAddedFromBookPage() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(3))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_info_icon_1")))
@@ -594,7 +594,7 @@ class TestAmazonCart {
     }
 
     @Test
-    fun `cart is saved when logged in with google`() {
+    fun cartIsSavedWhenLoggedInWithGoogle() {
         googleLogin()
         val wait = WebDriverWait(driver, Duration.ofSeconds(3))
         wait.until(ExpectedConditions.elementToBeClickable(By.id("book_info_icon_1")))
