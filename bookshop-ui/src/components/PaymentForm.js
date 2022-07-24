@@ -20,7 +20,7 @@ const PaymentForm = () => {
     };
 
     const sendForm = async (values) => {
-        remoteServer.pay(values, sum)
+        remoteServer.pay(values, (sum*100).toFixed(0))
             .then(response => {
                     if (response.status === 200) {
                         setSuccess(true)
