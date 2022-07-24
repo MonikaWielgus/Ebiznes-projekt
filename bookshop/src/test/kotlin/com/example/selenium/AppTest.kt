@@ -13,8 +13,8 @@ import java.time.Duration
 class TestAmazonCart {
 
     private val BASE_URL = "http://localhost:3000"
-    private val firstBookTitle = "Jakaś książka"
-    private val firstBookAuthor = "Jakiś autor"
+    private val firstBookTitle = "Książka 1"
+    private val firstBookAuthor = "Autor 1"
     private val actualFirstBookPrice = "11.59 zł"
     private val actualSecondBookPrice = "20.30 zł"
 
@@ -254,11 +254,11 @@ class TestAmazonCart {
         Assertions.assertTrue(categoryHeader.isDisplayed)
         Assertions.assertEquals("Kategoria", categoryHeader.text)
         Assertions.assertTrue(category.isDisplayed)
-        Assertions.assertEquals("Romans", category.text)
+        Assertions.assertEquals("Kategoria 1", category.text)
         Assertions.assertTrue(priceHeader.isDisplayed)
         Assertions.assertEquals("Cena", priceHeader.text)
         Assertions.assertTrue(price.isDisplayed)
-        Assertions.assertEquals(actualFirstBookPrice, price.text)
+        Assertions.assertEquals("11.59", price.text)
         Assertions.assertTrue(addToCartButton.isDisplayed)
     }
 

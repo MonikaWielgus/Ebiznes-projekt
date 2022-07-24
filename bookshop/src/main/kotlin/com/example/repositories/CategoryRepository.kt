@@ -15,6 +15,6 @@ class CategoryRepository {
     }
 }
 
-val categoryStorage = mutableMapOf(1 to Category(1, "Romans"),
-2 to Category(2, "Kryminalne"),
-3 to Category(3, "Obyczajowe"))
+val categoryStorage = mutableMapOf(1 to Category(1, "Kategoria 1"),
+2 to Category(2, "Kategoria 2"),
+3 to Category(3, "Kategoria 3"))

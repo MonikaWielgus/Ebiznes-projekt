@@ -17,22 +17,22 @@ class BookRepository {
 val bookStorage = mutableMapOf(
     1 to Book(
         1,
-        "Jakaś książka",
-        "Jakiś autor",
+        "Książka 1",
+        "Autor 1",
         1,
         11.59
     ),
     2 to Book(
         2,
-        "Jakaś książka 2",
-        "Jakiś autor 2",
+        "Książka 2",
+        "Autor 2",
         1,
         20.30
     ),
     3 to Book(
         3,
-        "Kryminal",
-        "Jakiś autor 2",
+        "Książka 2",
+        "Autor 2",
         2,
         20.30
     )
